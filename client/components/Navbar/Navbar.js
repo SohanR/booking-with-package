@@ -4,6 +4,7 @@ import { FaGripLines, FaHome, FaNewspaper, FaTimes } from 'react-icons/fa';
 import { MdLocalHotel, MdLocalTaxi, MdMapsHomeWork } from 'react-icons/md';
 import { Contexts } from '../../ContextUser/Contexts';
 import style from './Navbar.module.scss';
+import { MdMotionPhotosAuto } from "react-icons/md";
 
 function Navbar() {
     const { user, dispatch } = useContext(Contexts);
@@ -34,16 +35,23 @@ function Navbar() {
         {
             id: 4,
             icon: <MdLocalHotel className={style.icon} />,
-            txt: 'Resorts',
+            txt: 'Packages',
             isActive: false,
-            href: '/',
+            href: '/packages',
         },
         {
             id: 5,
             icon: <MdLocalTaxi className={style.icon} />,
             txt: 'Taxis',
             isActive: false,
-            href: '/',
+            href: '/taxis',
+        },
+        {
+            id: 6,
+            icon: <MdMotionPhotosAuto className={style.icon} />,
+            txt: 'Photography',
+            isActive: false,
+            href: '/photography',
         },
     ];
 
