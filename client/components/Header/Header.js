@@ -16,7 +16,6 @@ import {
 import { Context } from '../../ContextApi/Context';
 import { Contexts } from '../../ContextUser/Contexts';
 import style from './header.module.scss';
-
 function Header({type}) {
     const [openDate, setOpenDate] = useState(false)
     const [openOption, setOpenOption] = useState(false)
