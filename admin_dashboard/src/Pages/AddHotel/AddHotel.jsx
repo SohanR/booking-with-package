@@ -10,6 +10,9 @@ import Navbar from '../../Components/Navbar/Navbar';
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import noImage from '../../Images/photo-camera.png';
 import './addHotel.scss';
+import { baseUrl } from '../../base';
+
+
 
 function AddHotel({ inputs, title, type }) {
     const [inpVal, setInpVal] = useState({
@@ -36,7 +39,7 @@ function AddHotel({ inputs, title, type }) {
    update the state variable `roomData` with the response data. */
     useEffect(() => {
         const roomsss = async () => {
-            const room = await axios.get('https://rooms-backend.onrender.com/api/rooms');
+            const room = await axios.get(`${baseUrl}/api/rooms`);
             setroomData(room.data.message);
         };
         roomsss();
@@ -87,7 +90,7 @@ function AddHotel({ inputs, title, type }) {
                 images: imgList,
             };
 
-            await axios.post('https://rooms-backend.onrender.com/api/hotel/create', newHotel);
+            await axios.post(`${baseUrl}/api/hotel/create`, newHotel);
             setLoading(false);
             nevigate(`/hotels`);
         } catch (error) {

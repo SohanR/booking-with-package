@@ -16,6 +16,8 @@ import SocialLink from '../../components/FormComponents/SocialLink';
 import Navbar from '../../components/Navbar/Navbar';
 import noImage from '../../images/user.png';
 import styles from '../../styles/signuppage.module.scss';
+import { baseUrl } from '../../utils/base';
+
 
 const index = () => {
     const Router = useRouter();
@@ -68,7 +70,6 @@ const index = () => {
 
     const PageTitle = ['Sign In', 'Personal Info', 'Social Links'];
 
-
     //  The `handleSubmit` function is used to handle form submission, including uploading a photo to
     // Cloudinary and making a POST request to a signup API endpoint.
     const handleSubmit = async (e) => {
@@ -88,7 +89,7 @@ const index = () => {
 
                 const { url } = uploadRes.data;
                 try {
-                    await axios.post('https://rooms-backend.onrender.com/api/user/signup', {
+                    await axios.post(`${baseUrl}/api/user/signup`, {
                         email,
                         password: pass,
                         fullname,
@@ -109,7 +110,7 @@ const index = () => {
                 }
             } else {
                 try {
-                    await axios.post('https://rooms-backend.onrender.com/api/user/signup', {
+                    await axios.post(`${baseUrl}/api/user/signup`, {
                         email,
                         password: pass,
                         fullname,
@@ -134,7 +135,6 @@ const index = () => {
             setLoading(false);
         }
     };
-
 
     // The function returns different components based on the value of the "page" variable.
     // @returns The code is returning a component based on the value of the "page" variable. If "page"

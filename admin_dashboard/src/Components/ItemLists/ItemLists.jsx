@@ -8,6 +8,8 @@ import React, { useEffect, useState } from 'react';
 import CountUp from 'react-countup';
 import { Link } from 'react-router-dom';
 import './itemlists.scss';
+import { baseUrl } from '../../base';
+
 
 function ItemLists({ type }) {
     // store the data
@@ -19,9 +21,9 @@ function ItemLists({ type }) {
    is used to fetch data from three different API endpoints with the response data. */
     useEffect(() => {
         const datass = async () => {
-            const res = await axios.get('https://rooms-backend.onrender.com/api/hotels');
-            const res2 = await axios.get('https://rooms-backend.onrender.com/api/blogs');
-            const res3 = await axios.get('https://rooms-backend.onrender.com/api/users');
+            const res = await axios.get(`${baseUrl}/api/hotels`);
+            const res2 = await axios.get(`${baseUrl}/api/blogs`);
+            const res3 = await axios.get(`${baseUrl}/api/users`);
             setHotelData(res.data.message);
             setBlogData(res2.data.message);
             setUserData(res3.data.message);

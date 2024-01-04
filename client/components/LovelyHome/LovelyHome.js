@@ -3,7 +3,6 @@ import React from 'react';
 import style from './LovelyHome.module.scss';
 
 function LovelyHome({ hmDetails }) {
-
     return (
         <div className={style.lovely_home}>
             {/* <div>

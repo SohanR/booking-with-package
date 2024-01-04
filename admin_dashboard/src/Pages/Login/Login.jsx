@@ -5,6 +5,8 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Contexts } from '../../ContextUser/Contexts';
 import './Login.scss';
+import { baseUrl } from '../../base';
+
 
 const index = () => {
     const [email, setEmail] = useState('');
@@ -29,7 +31,7 @@ const index = () => {
 
         try {
             const res = await axios.post(
-                'https://rooms-backend.onrender.com/api/user/login',
+                `${baseUrl}/api/user/login`,
                 inpVal
             );
 

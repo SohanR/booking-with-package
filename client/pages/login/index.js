@@ -13,6 +13,8 @@ import Footer from '../../components/Footer/Footer';
 import Input from '../../components/Input/Input';
 import Navbar from '../../components/Navbar/Navbar';
 import styles from '../../styles/login.module.scss';
+import { baseUrl } from '../../utils/base';
+
 
 const index = () => {
     const [inpval, setInpval] = useState({
@@ -26,7 +28,7 @@ const index = () => {
 
     //  The `inpDetail` constant is an array of objects that contains the details of the input fields
     // used in the login form. Each object represents an input field and contains the following
-    // properties: 
+    // properties:
     const inpDetail = [
         {
             id: 2,
@@ -45,7 +47,6 @@ const index = () => {
             errMsg: 'This field is required!',
         },
     ];
-
 
     //   The handleChng function updates the value of a specific property in the inpval object based on
     //   the user's input.
@@ -67,7 +68,6 @@ const index = () => {
         },
     });
 
-
     // The handleSubmit function is used to handle form submission for user login, making a POST
     // request to the specified API endpoint and dispatching actions based on the response.
     const handleSubmit = async (e) => {
@@ -76,7 +76,7 @@ const index = () => {
 
         try {
             const res = await axios.post(
-                'https://rooms-backend.onrender.com/api/user/login',
+                `${baseUrl}/api/user/login`,
                 inpval
             );
             dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.message.details });

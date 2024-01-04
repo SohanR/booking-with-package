@@ -16,6 +16,8 @@ import Navbar from '../../components/Navbar/Navbar';
 import Newsletter from '../../components/Newsletter/Newsletter';
 import SearchItem from '../../components/SearchItem/SearchItem';
 import style from '../../styles/hotels.module.scss';
+import { baseUrl } from '../../utils/base';
+
 
 const index = ({ hotelList }) => {
     const { query } = useRouter();
@@ -39,35 +41,34 @@ const index = ({ hotelList }) => {
 
     const { dispatch } = useContext(Context);
 
-//  The `useEffect` hook is used to perform side effects in a functional component. In this case, the
-// `useEffect` hook is used to fetch hotel data based on the selected city. 
+    //  The `useEffect` hook is used to perform side effects in a functional component. In this case, the
+    // `useEffect` hook is used to fetch hotel data based on the selected city.
     useEffect(() => {
         const getHotelByCity = async () => {
+            if (city !== '') {
+                const response = await axios.get(
+                    `${baseUrl}/api/hotels?city=${city}`
+                );
+                const hotels = await response.data.message;
+                setHotelData(hotels);
+            } else {
+                setHotelData(hotelList);
+            }
+        };
 
-            if (city !== "") {
-            const response = await axios.get(`https://rooms-backend.onrender.com/api/hotels?city=${city}`
-            );
-            const hotels = await response.data.message
-            setHotelData(hotels)
-        } else  {
-            setHotelData(hotelList)
-        }
-        }
+        getHotelByCity();
+    }, [city]);
 
-        getHotelByCity()
-    }, [city])
-
-
-//  The handleSubmit function is used to handle form submission, dispatch a new search action, and fetch
-//  hotel data from a server based on search values.
-//  @param e - The parameter `e` is an event object that represents the event that triggered the form
-//  submission. In this case, it is the form submission event.
+    //  The handleSubmit function is used to handle form submission, dispatch a new search action, and fetch
+    //  hotel data from a server based on search values.
+    //  @param e - The parameter `e` is an event object that represents the event that triggered the form
+    //  submission. In this case, it is the form submission event.
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch({ type: 'NEW_SEARCH', payload: { city, dates, options } });
         // fetch data from server by search values
         const hotels = await axios.get(
-            `https://rooms-backend.onrender.com/api/hotels?city=${city?.toLocaleLowerCase()}&min=${min}&max=${max}`
+            `${baseUrl}/api/hotels?city=${city?.toLocaleLowerCase()}&min=${min}&max=${max}`
         );
         const hotelDatas = await hotels.data.message;
         setHotelData(hotelDatas);
@@ -202,10 +203,9 @@ const index = ({ hotelList }) => {
 
 export default index;
 
-
 // The function retrieves a list of hotels from an API endpoint and returns it as a prop.
 export async function getStaticProps() {
-    const response = await axios.get('https://rooms-backend.onrender.com/api/hotels');
+    const response = await axios.get(`${baseUrl}/api/hotels`);
 
     const data = await response.data.message;
 
