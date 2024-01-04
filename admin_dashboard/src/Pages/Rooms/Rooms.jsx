@@ -7,6 +7,8 @@ import { Link, useLocation } from 'react-router-dom';
 import Navbar from '../../Components/Navbar/Navbar';
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import './rooms.scss';
+import { baseUrl } from '../../base';
+
 
 function Rooms({ type }) {
     const [data, setData] = useState([]);
@@ -17,7 +19,7 @@ function Rooms({ type }) {
    effect is triggered when the `data` state variable changes. */
     useEffect(() => {
         const datass = async () => {
-            const res = await axios.get('https://rooms-backend.onrender.com/api/rooms');
+            const res = await axios.get(`${baseUrl}/api/rooms`);
             setData(res.data.message);
         };
         datass();
@@ -29,7 +31,7 @@ function Rooms({ type }) {
      */
     const handleDlt = (id) => {
         try {
-            axios.delete(`https://rooms-backend.onrender.com/api/${path}/${id}`);
+            axios.delete(`${baseUrl}/api/${path}/${id}`);
             setData(data.filter((item) => item.id !== id));
             console.log(`deleted room ${id}`);
         } catch (error) {

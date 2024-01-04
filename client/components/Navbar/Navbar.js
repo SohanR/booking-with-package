@@ -1,10 +1,9 @@
 import Link from 'next/link';
 import React, { useContext, useState } from 'react';
 import { FaGripLines, FaHome, FaNewspaper, FaTimes } from 'react-icons/fa';
-import { MdLocalHotel, MdLocalTaxi, MdMapsHomeWork } from 'react-icons/md';
+import { MdLocalHotel, MdLocalTaxi, MdMapsHomeWork, MdMotionPhotosAuto } from 'react-icons/md';
 import { Contexts } from '../../ContextUser/Contexts';
 import style from './Navbar.module.scss';
-import { MdMotionPhotosAuto } from "react-icons/md";
 
 function Navbar() {
     const { user, dispatch } = useContext(Contexts);

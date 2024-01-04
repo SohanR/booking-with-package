@@ -11,9 +11,9 @@ import SpecialServices from '../components/SpecialServices/SpecialServices';
 import WhyUs from '../components/WhyUs/WhyUs';
 import LovelyHomeDetail from '../components/lovelyHomeDetail/LovelyHomeDetail';
 import styles from '../styles/index.module.scss';
+import baseUrl from './../utils/base'
 
 export default function Home({ propertyList, propertyList2, homesDetails, blogss }) {
-
     return (
         <div className={styles.container}>
             <Head>
@@ -38,7 +38,6 @@ export default function Home({ propertyList, propertyList2, homesDetails, blogss
     );
 }
 
-
 //  The function `getStaticProps` makes multiple API requests to retrieve data related to hotels and
 //  blogs, and returns the retrieved data as props.
 //  returns an object with the properties `propertyList`, `propertyList2`, `homesDetails`, and
@@ -46,15 +45,15 @@ export default function Home({ propertyList, propertyList2, homesDetails, blogss
 
 export async function getStaticProps() {
     const response = await axios.get(
-        'https://rooms-backend.onrender.com/api/hotels/getHotelByCity?cities=berlin,tokyo,dubai'
+        `${baseUrl}/api/hotels/getHotelByCity?cities=berlin,tokyo,dubai`
     );
     const response2 = await axios.get(
-        'https://rooms-backend.onrender.com/api/hotels/getHotelByType'
+        `${baseUrl}/api/hotels/getHotelByType`
     );
     const response3 = await axios.get(
-        'https://rooms-backend.onrender.com/api/hotels?featured=true&limit=4'
+        `${baseUrl}/api/hotels?featured=true&limit=4`
     );
-    const res = await axios.get('https://rooms-backend.onrender.com/api/blogs');
+    const res = await axios.get(`${baseUrl}/api/blogs`);
 
     const data = await response.data.message;
     const data2 = await response2.data.message;

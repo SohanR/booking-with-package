@@ -11,6 +11,8 @@ import bImg2 from '../../images/blog2.jpg';
 import bImg3 from '../../images/blog3.jpg';
 import bImg4 from '../../images/blog4.jpg';
 import style from '../../styles/blogpage.module.scss';
+import { baseUrl } from '../../utils/base';
+
 
 // remove this dummy data and fetch from database
 const Blogs = [
@@ -118,7 +120,7 @@ export default index;
 //  returns an object with a "props" property. The "props" property contains a "blogs" property, which
 //  is assigned the value of the "data" variable.
 export async function getStaticProps() {
-    const res = await axios.get('https://rooms-backend.onrender.com/api/blogs');
+    const res = await axios.get(`${baseUrl}/api/blogs`);
     const data = await res.data.message;
 
     return {

@@ -10,6 +10,8 @@ import Navbar from '../../Components/Navbar/Navbar';
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import noImage from '../../Images/photo-camera.png';
 import './New.scss';
+import { baseUrl } from '../../base';
+
 
 function AddNew({ inputs, title, type }) {
     let dynamicInpVal;
@@ -79,7 +81,7 @@ function AddNew({ inputs, title, type }) {
             }
 
             await axios.post(
-                `https://rooms-backend.onrender.com/api/${
+                `${baseUrl}/api/${
                     type === 'USER' ? 'user/signup' : 'blog/create'
                 }`,
                 userInp

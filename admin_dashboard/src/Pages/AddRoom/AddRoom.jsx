@@ -8,6 +8,8 @@ import Input from '../../Components/Input/Input';
 import Navbar from '../../Components/Navbar/Navbar';
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import './addroom.scss';
+import { baseUrl } from '../../base';
+
 
 function AddRoom({ inputs, title, type }) {
     const [inpVal, setInpVal] = useState({
@@ -28,7 +30,7 @@ function AddRoom({ inputs, title, type }) {
    update the state variables `roomData` with the response data. */
     useEffect(() => {
         const roomsss = async () => {
-            const hotel = await axios.get('https://rooms-backend.onrender.com/api/hotels');
+            const hotel = await axios.get(`${baseUrl}/api/hotels`);
             setRoomData(hotel.data.message);
         };
         roomsss();
@@ -54,7 +56,7 @@ function AddRoom({ inputs, title, type }) {
         try {
             setLoading(true);
 
-            await axios.post(`https://rooms-backend.onrender.com/api/room/${hotelId}`, datas);
+            await axios.post(`${baseUrl}/api/room/${hotelId}`, datas);
 
             setLoading(false);
             nevigate(`/rooms`);

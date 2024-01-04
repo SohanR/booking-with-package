@@ -10,6 +10,8 @@ import Navbar from '../../components/Navbar/Navbar';
 import Newsletter from '../../components/Newsletter/Newsletter';
 import noPhoto from '../../images/no hotel.jpg';
 import style from '../../styles/blogdetail.module.scss';
+import { baseUrl } from '../../utils/base';
+
 
 // remove this dummy data and fetch from the database
 
@@ -70,12 +72,11 @@ const blogDetails = ({ blogList1, blogss }) => (
 );
 export default blogDetails;
 
-
 // The function `getStaticPaths` retrieves data from an API endpoint and generates an array of paths
 // based on the response data.
 // @returns an object with two properties: "paths" and "fallback".
 export async function getStaticPaths() {
-    const response = await axios.get(`https://rooms-backend.onrender.com/api/blogs`);
+    const response = await axios.get(`${baseUrl}/api/blogs`);
     const data = await response.data.message;
 
     const paths = data.map((item) => ({
@@ -90,15 +91,14 @@ export async function getStaticPaths() {
     };
 }
 
-
 // The function `getStaticProps` is an asynchronous function that fetches data from two API routes and
 // returns the data as props.
 export async function getStaticProps(context) {
     // api route
     const { params } = context;
     console.log(params);
-    const res = await axios.get(`https://rooms-backend.onrender.com/api/blog/${params.blog}`);
-    const res2 = await axios.get('https://rooms-backend.onrender.com/api/blogs');
+    const res = await axios.get(`${baseUrl}/api/blog/${params.blog}`);
+    const res2 = await axios.get(`${baseUrl}/api/blogs`);
 
     const data = await res.data.message;
     const blogss = await res2.data.message;
